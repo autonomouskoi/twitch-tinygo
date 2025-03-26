@@ -25,6 +25,8 @@ const (
 	MessageTypeRequest_TYPE_REQUEST_EVENT_GET_STATUS_RESP MessageTypeRequest = 8
 	MessageTypeRequest_TYPE_REQUEST_GET_USER_REQ          MessageTypeRequest = 9
 	MessageTypeRequest_TYPE_REQUEST_GET_USER_RESP         MessageTypeRequest = 10
+	MessageTypeRequest_TYPE_REQUEST_SEND_SHOUTOUT_REQ     MessageTypeRequest = 11
+	MessageTypeRequest_TYPE_REQUEST_SEND_SHOUTOUT_RESP    MessageTypeRequest = 12
 )
 
 // Enum value maps for MessageTypeRequest.
@@ -41,6 +43,8 @@ var (
 		8:  "TYPE_REQUEST_EVENT_GET_STATUS_RESP",
 		9:  "TYPE_REQUEST_GET_USER_REQ",
 		10: "TYPE_REQUEST_GET_USER_RESP",
+		11: "TYPE_REQUEST_SEND_SHOUTOUT_REQ",
+		12: "TYPE_REQUEST_SEND_SHOUTOUT_RESP",
 	}
 	MessageTypeRequest_value = map[string]int32{
 		"TYPE_REQUEST_UNSPECIFIED":           0,
@@ -54,6 +58,8 @@ var (
 		"TYPE_REQUEST_EVENT_GET_STATUS_RESP": 8,
 		"TYPE_REQUEST_GET_USER_REQ":          9,
 		"TYPE_REQUEST_GET_USER_RESP":         10,
+		"TYPE_REQUEST_SEND_SHOUTOUT_REQ":     11,
+		"TYPE_REQUEST_SEND_SHOUTOUT_RESP":    12,
 	}
 )
 
@@ -83,7 +89,8 @@ func (*ListProfilesRequest) ProtoMessage() {}
 
 type ListProfilesResponse struct {
 	unknownFields []byte
-	Names         []string `protobuf:"bytes,1,rep,name=names,proto3" json:"names,omitempty"`
+	Names         []string                               `protobuf:"bytes,1,rep,name=names,proto3" json:"names,omitempty"`
+	Profiles      []*ListProfilesResponse_ProfileListing `protobuf:"bytes,2,rep,name=profiles,proto3" json:"profiles,omitempty"`
 }
 
 func (x *ListProfilesResponse) Reset() {
@@ -95,6 +102,13 @@ func (*ListProfilesResponse) ProtoMessage() {}
 func (x *ListProfilesResponse) GetNames() []string {
 	if x != nil {
 		return x.Names
+	}
+	return nil
+}
+
+func (x *ListProfilesResponse) GetProfiles() []*ListProfilesResponse_ProfileListing {
+	if x != nil {
+		return x.Profiles
 	}
 	return nil
 }
@@ -287,6 +301,92 @@ func (x *GetUserResponse) GetUser() *User {
 	return nil
 }
 
+type SendShoutoutRequest struct {
+	unknownFields   []byte
+	FromProfile     string `protobuf:"bytes,1,opt,name=from_profile,json=fromProfile,proto3" json:"fromProfile,omitempty"`
+	ToBroadcasterId string `protobuf:"bytes,2,opt,name=to_broadcaster_id,json=toBroadcasterId,proto3" json:"toBroadcasterId,omitempty"`
+	ModeratorId     string `protobuf:"bytes,3,opt,name=moderator_id,json=moderatorId,proto3" json:"moderatorId,omitempty"`
+}
+
+func (x *SendShoutoutRequest) Reset() {
+	*x = SendShoutoutRequest{}
+}
+
+func (*SendShoutoutRequest) ProtoMessage() {}
+
+func (x *SendShoutoutRequest) GetFromProfile() string {
+	if x != nil {
+		return x.FromProfile
+	}
+	return ""
+}
+
+func (x *SendShoutoutRequest) GetToBroadcasterId() string {
+	if x != nil {
+		return x.ToBroadcasterId
+	}
+	return ""
+}
+
+func (x *SendShoutoutRequest) GetModeratorId() string {
+	if x != nil {
+		return x.ModeratorId
+	}
+	return ""
+}
+
+type SendShoutoutResponse struct {
+	unknownFields []byte
+}
+
+func (x *SendShoutoutResponse) Reset() {
+	*x = SendShoutoutResponse{}
+}
+
+func (*SendShoutoutResponse) ProtoMessage() {}
+
+type ListProfilesResponse_ProfileListing struct {
+	unknownFields []byte
+	Name          string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	UserId        string   `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"userId,omitempty"`
+	Scopes        []string `protobuf:"bytes,3,rep,name=scopes,proto3" json:"scopes,omitempty"`
+	Expires       int64    `protobuf:"varint,4,opt,name=expires,proto3" json:"expires,omitempty"`
+}
+
+func (x *ListProfilesResponse_ProfileListing) Reset() {
+	*x = ListProfilesResponse_ProfileListing{}
+}
+
+func (*ListProfilesResponse_ProfileListing) ProtoMessage() {}
+
+func (x *ListProfilesResponse_ProfileListing) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ListProfilesResponse_ProfileListing) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ListProfilesResponse_ProfileListing) GetScopes() []string {
+	if x != nil {
+		return x.Scopes
+	}
+	return nil
+}
+
+func (x *ListProfilesResponse_ProfileListing) GetExpires() int64 {
+	if x != nil {
+		return x.Expires
+	}
+	return 0
+}
+
 func (m *ListProfilesRequest) CloneVT() *ListProfilesRequest {
 	if m == nil {
 		return (*ListProfilesRequest)(nil)
@@ -303,6 +403,30 @@ func (m *ListProfilesRequest) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
+func (m *ListProfilesResponse_ProfileListing) CloneVT() *ListProfilesResponse_ProfileListing {
+	if m == nil {
+		return (*ListProfilesResponse_ProfileListing)(nil)
+	}
+	r := new(ListProfilesResponse_ProfileListing)
+	r.Name = m.Name
+	r.UserId = m.UserId
+	r.Expires = m.Expires
+	if rhs := m.Scopes; rhs != nil {
+		tmpContainer := make([]string, len(rhs))
+		copy(tmpContainer, rhs)
+		r.Scopes = tmpContainer
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *ListProfilesResponse_ProfileListing) CloneMessageVT() protobuf_go_lite.CloneMessage {
+	return m.CloneVT()
+}
+
 func (m *ListProfilesResponse) CloneVT() *ListProfilesResponse {
 	if m == nil {
 		return (*ListProfilesResponse)(nil)
@@ -312,6 +436,13 @@ func (m *ListProfilesResponse) CloneVT() *ListProfilesResponse {
 		tmpContainer := make([]string, len(rhs))
 		copy(tmpContainer, rhs)
 		r.Names = tmpContainer
+	}
+	if rhs := m.Profiles; rhs != nil {
+		tmpContainer := make([]*ListProfilesResponse_ProfileListing, len(rhs))
+		for k, v := range rhs {
+			tmpContainer[k] = v.CloneVT()
+		}
+		r.Profiles = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -495,6 +626,41 @@ func (m *GetUserResponse) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
+func (m *SendShoutoutRequest) CloneVT() *SendShoutoutRequest {
+	if m == nil {
+		return (*SendShoutoutRequest)(nil)
+	}
+	r := new(SendShoutoutRequest)
+	r.FromProfile = m.FromProfile
+	r.ToBroadcasterId = m.ToBroadcasterId
+	r.ModeratorId = m.ModeratorId
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *SendShoutoutRequest) CloneMessageVT() protobuf_go_lite.CloneMessage {
+	return m.CloneVT()
+}
+
+func (m *SendShoutoutResponse) CloneVT() *SendShoutoutResponse {
+	if m == nil {
+		return (*SendShoutoutResponse)(nil)
+	}
+	r := new(SendShoutoutResponse)
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *SendShoutoutResponse) CloneMessageVT() protobuf_go_lite.CloneMessage {
+	return m.CloneVT()
+}
+
 func (this *ListProfilesRequest) EqualVT(that *ListProfilesRequest) bool {
 	if this == that {
 		return true
@@ -506,6 +672,40 @@ func (this *ListProfilesRequest) EqualVT(that *ListProfilesRequest) bool {
 
 func (this *ListProfilesRequest) EqualMessageVT(thatMsg any) bool {
 	that, ok := thatMsg.(*ListProfilesRequest)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *ListProfilesResponse_ProfileListing) EqualVT(that *ListProfilesResponse_ProfileListing) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.Name != that.Name {
+		return false
+	}
+	if this.UserId != that.UserId {
+		return false
+	}
+	if len(this.Scopes) != len(that.Scopes) {
+		return false
+	}
+	for i, vx := range this.Scopes {
+		vy := that.Scopes[i]
+		if vx != vy {
+			return false
+		}
+	}
+	if this.Expires != that.Expires {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *ListProfilesResponse_ProfileListing) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*ListProfilesResponse_ProfileListing)
 	if !ok {
 		return false
 	}
@@ -524,6 +724,23 @@ func (this *ListProfilesResponse) EqualVT(that *ListProfilesResponse) bool {
 		vy := that.Names[i]
 		if vx != vy {
 			return false
+		}
+	}
+	if len(this.Profiles) != len(that.Profiles) {
+		return false
+	}
+	for i, vx := range this.Profiles {
+		vy := that.Profiles[i]
+		if p, q := vx, vy; p != q {
+			if p == nil {
+				p = &ListProfilesResponse_ProfileListing{}
+			}
+			if q == nil {
+				q = &ListProfilesResponse_ProfileListing{}
+			}
+			if !p.EqualVT(q) {
+				return false
+			}
 		}
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -729,6 +946,47 @@ func (this *GetUserResponse) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
+func (this *SendShoutoutRequest) EqualVT(that *SendShoutoutRequest) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.FromProfile != that.FromProfile {
+		return false
+	}
+	if this.ToBroadcasterId != that.ToBroadcasterId {
+		return false
+	}
+	if this.ModeratorId != that.ModeratorId {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *SendShoutoutRequest) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*SendShoutoutRequest)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *SendShoutoutResponse) EqualVT(that *SendShoutoutResponse) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *SendShoutoutResponse) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*SendShoutoutResponse)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
 func (m *ListProfilesRequest) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -762,6 +1020,67 @@ func (m *ListProfilesRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *ListProfilesResponse_ProfileListing) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListProfilesResponse_ProfileListing) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *ListProfilesResponse_ProfileListing) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.Expires != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Expires))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.Scopes) > 0 {
+		for iNdEx := len(m.Scopes) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Scopes[iNdEx])
+			copy(dAtA[i:], m.Scopes[iNdEx])
+			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Scopes[iNdEx])))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.UserId) > 0 {
+		i -= len(m.UserId)
+		copy(dAtA[i:], m.UserId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.UserId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *ListProfilesResponse) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -791,6 +1110,18 @@ func (m *ListProfilesResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Profiles) > 0 {
+		for iNdEx := len(m.Profiles) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.Profiles[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+			i--
+			dAtA[i] = 0x12
+		}
 	}
 	if len(m.Names) > 0 {
 		for iNdEx := len(m.Names) - 1; iNdEx >= 0; iNdEx-- {
@@ -1218,12 +1549,126 @@ func (m *GetUserResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *SendShoutoutRequest) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *SendShoutoutRequest) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *SendShoutoutRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.ModeratorId) > 0 {
+		i -= len(m.ModeratorId)
+		copy(dAtA[i:], m.ModeratorId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ModeratorId)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.ToBroadcasterId) > 0 {
+		i -= len(m.ToBroadcasterId)
+		copy(dAtA[i:], m.ToBroadcasterId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ToBroadcasterId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.FromProfile) > 0 {
+		i -= len(m.FromProfile)
+		copy(dAtA[i:], m.FromProfile)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.FromProfile)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *SendShoutoutResponse) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *SendShoutoutResponse) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *SendShoutoutResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *ListProfilesRequest) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *ListProfilesResponse_ProfileListing) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.UserId)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	if len(m.Scopes) > 0 {
+		for _, s := range m.Scopes {
+			l = len(s)
+			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+		}
+	}
+	if m.Expires != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.Expires))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -1237,6 +1682,12 @@ func (m *ListProfilesResponse) SizeVT() (n int) {
 	if len(m.Names) > 0 {
 		for _, s := range m.Names {
 			l = len(s)
+			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+		}
+	}
+	if len(m.Profiles) > 0 {
+		for _, e := range m.Profiles {
+			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
 	}
@@ -1387,6 +1838,38 @@ func (m *GetUserResponse) SizeVT() (n int) {
 	return n
 }
 
+func (m *SendShoutoutRequest) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.FromProfile)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.ToBroadcasterId)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.ModeratorId)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *SendShoutoutResponse) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += len(m.unknownFields)
+	return n
+}
+
 func (m *ListProfilesRequest) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1416,6 +1899,172 @@ func (m *ListProfilesRequest) UnmarshalVT(dAtA []byte) error {
 			return fmt.Errorf("proto: ListProfilesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListProfilesResponse_ProfileListing) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListProfilesResponse_ProfileListing: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListProfilesResponse_ProfileListing: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UserId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UserId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Scopes", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Scopes = append(m.Scopes, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Expires", wireType)
+			}
+			m.Expires = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Expires |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -1498,6 +2147,40 @@ func (m *ListProfilesResponse) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Names = append(m.Names, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Profiles", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Profiles = append(m.Profiles, &ListProfilesResponse_ProfileListing{})
+			if err := m.Profiles[len(m.Profiles)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -2360,6 +3043,204 @@ func (m *GetUserResponse) UnmarshalVT(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *SendShoutoutRequest) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: SendShoutoutRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: SendShoutoutRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FromProfile", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FromProfile = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ToBroadcasterId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ToBroadcasterId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ModeratorId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ModeratorId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *SendShoutoutResponse) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: SendShoutoutResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: SendShoutoutResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
