@@ -7,6 +7,7 @@ package twitch
 import (
 	fmt "fmt"
 	protobuf_go_lite "github.com/aperturerobotics/protobuf-go-lite"
+	json "github.com/aperturerobotics/protobuf-go-lite/json"
 	io "io"
 	strconv "strconv"
 )
@@ -233,6 +234,169 @@ func (this *User) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
+
+// MarshalProtoJSON marshals the BusTopics to JSON.
+func (x BusTopics) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), BusTopics_name)
+}
+
+// MarshalText marshals the BusTopics to text.
+func (x BusTopics) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), BusTopics_name)), nil
+}
+
+// MarshalJSON marshals the BusTopics to JSON.
+func (x BusTopics) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the BusTopics from JSON.
+func (x *BusTopics) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(BusTopics_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read BusTopics enum: %v", err)
+		return
+	}
+	*x = BusTopics(v)
+}
+
+// UnmarshalText unmarshals the BusTopics from text.
+func (x *BusTopics) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), BusTopics_value)
+	if err != nil {
+		return err
+	}
+	*x = BusTopics(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the BusTopics from JSON.
+func (x *BusTopics) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the User message to JSON.
+func (x *User) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Id != "" || s.HasField("id") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("id")
+		s.WriteString(x.Id)
+	}
+	if x.Login != "" || s.HasField("login") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("login")
+		s.WriteString(x.Login)
+	}
+	if x.DisplayName != "" || s.HasField("displayName") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("displayName")
+		s.WriteString(x.DisplayName)
+	}
+	if x.Type != "" || s.HasField("type") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("type")
+		s.WriteString(x.Type)
+	}
+	if x.BroadcasterType != "" || s.HasField("broadcasterType") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("broadcasterType")
+		s.WriteString(x.BroadcasterType)
+	}
+	if x.Description != "" || s.HasField("description") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("description")
+		s.WriteString(x.Description)
+	}
+	if x.ProfileImageUrl != "" || s.HasField("profileImageUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("profileImageUrl")
+		s.WriteString(x.ProfileImageUrl)
+	}
+	if x.OfflineImageUrl != "" || s.HasField("offlineImageUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("offlineImageUrl")
+		s.WriteString(x.OfflineImageUrl)
+	}
+	if x.ViewCount != 0 || s.HasField("viewCount") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("viewCount")
+		s.WriteUint32(x.ViewCount)
+	}
+	if x.Email != "" || s.HasField("email") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("email")
+		s.WriteString(x.Email)
+	}
+	if x.CreatedAt != 0 || s.HasField("createdAt") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("createdAt")
+		s.WriteUint32(x.CreatedAt)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the User to JSON.
+func (x *User) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the User message from JSON.
+func (x *User) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "id":
+			s.AddField("id")
+			x.Id = s.ReadString()
+		case "login":
+			s.AddField("login")
+			x.Login = s.ReadString()
+		case "display_name", "displayName":
+			s.AddField("display_name")
+			x.DisplayName = s.ReadString()
+		case "type":
+			s.AddField("type")
+			x.Type = s.ReadString()
+		case "broadcaster_type", "broadcasterType":
+			s.AddField("broadcaster_type")
+			x.BroadcasterType = s.ReadString()
+		case "description":
+			s.AddField("description")
+			x.Description = s.ReadString()
+		case "profile_image_url", "profileImageUrl":
+			s.AddField("profile_image_url")
+			x.ProfileImageUrl = s.ReadString()
+		case "offline_image_url", "offlineImageUrl":
+			s.AddField("offline_image_url")
+			x.OfflineImageUrl = s.ReadString()
+		case "view_count", "viewCount":
+			s.AddField("view_count")
+			x.ViewCount = s.ReadUint32()
+		case "email":
+			s.AddField("email")
+			x.Email = s.ReadString()
+		case "created_at", "createdAt":
+			s.AddField("created_at")
+			x.CreatedAt = s.ReadUint32()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the User from JSON.
+func (x *User) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
 func (m *User) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil

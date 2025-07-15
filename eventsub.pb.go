@@ -7,6 +7,7 @@ package twitch
 import (
 	fmt "fmt"
 	protobuf_go_lite "github.com/aperturerobotics/protobuf-go-lite"
+	json "github.com/aperturerobotics/protobuf-go-lite/json"
 	io "io"
 	strconv "strconv"
 )
@@ -1726,6 +1727,1401 @@ func (this *EventChannelChatMessage) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
+
+// MarshalProtoJSON marshals the MessageTypeEventSub to JSON.
+func (x MessageTypeEventSub) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), MessageTypeEventSub_name)
+}
+
+// MarshalText marshals the MessageTypeEventSub to text.
+func (x MessageTypeEventSub) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), MessageTypeEventSub_name)), nil
+}
+
+// MarshalJSON marshals the MessageTypeEventSub to JSON.
+func (x MessageTypeEventSub) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the MessageTypeEventSub from JSON.
+func (x *MessageTypeEventSub) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(MessageTypeEventSub_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read MessageTypeEventSub enum: %v", err)
+		return
+	}
+	*x = MessageTypeEventSub(v)
+}
+
+// UnmarshalText unmarshals the MessageTypeEventSub from text.
+func (x *MessageTypeEventSub) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), MessageTypeEventSub_value)
+	if err != nil {
+		return err
+	}
+	*x = MessageTypeEventSub(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the MessageTypeEventSub from JSON.
+func (x *MessageTypeEventSub) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventSubStatus to JSON.
+func (x EventSubStatus) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), EventSubStatus_name)
+}
+
+// MarshalText marshals the EventSubStatus to text.
+func (x EventSubStatus) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), EventSubStatus_name)), nil
+}
+
+// MarshalJSON marshals the EventSubStatus to JSON.
+func (x EventSubStatus) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventSubStatus from JSON.
+func (x *EventSubStatus) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(EventSubStatus_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read EventSubStatus enum: %v", err)
+		return
+	}
+	*x = EventSubStatus(v)
+}
+
+// UnmarshalText unmarshals the EventSubStatus from text.
+func (x *EventSubStatus) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), EventSubStatus_value)
+	if err != nil {
+		return err
+	}
+	*x = EventSubStatus(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the EventSubStatus from JSON.
+func (x *EventSubStatus) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatMessageFragmentType to JSON.
+func (x ChatMessageFragmentType) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), ChatMessageFragmentType_name)
+}
+
+// MarshalText marshals the ChatMessageFragmentType to text.
+func (x ChatMessageFragmentType) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), ChatMessageFragmentType_name)), nil
+}
+
+// MarshalJSON marshals the ChatMessageFragmentType to JSON.
+func (x ChatMessageFragmentType) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatMessageFragmentType from JSON.
+func (x *ChatMessageFragmentType) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(ChatMessageFragmentType_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read ChatMessageFragmentType enum: %v", err)
+		return
+	}
+	*x = ChatMessageFragmentType(v)
+}
+
+// UnmarshalText unmarshals the ChatMessageFragmentType from text.
+func (x *ChatMessageFragmentType) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), ChatMessageFragmentType_value)
+	if err != nil {
+		return err
+	}
+	*x = ChatMessageFragmentType(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the ChatMessageFragmentType from JSON.
+func (x *ChatMessageFragmentType) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatMessageType to JSON.
+func (x ChatMessageType) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), ChatMessageType_name)
+}
+
+// MarshalText marshals the ChatMessageType to text.
+func (x ChatMessageType) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), ChatMessageType_name)), nil
+}
+
+// MarshalJSON marshals the ChatMessageType to JSON.
+func (x ChatMessageType) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatMessageType from JSON.
+func (x *ChatMessageType) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(ChatMessageType_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read ChatMessageType enum: %v", err)
+		return
+	}
+	*x = ChatMessageType(v)
+}
+
+// UnmarshalText unmarshals the ChatMessageType from text.
+func (x *ChatMessageType) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), ChatMessageType_value)
+	if err != nil {
+		return err
+	}
+	*x = ChatMessageType(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the ChatMessageType from JSON.
+func (x *ChatMessageType) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventSubStatusEvent message to JSON.
+func (x *EventSubStatusEvent) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Status != 0 || s.HasField("status") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("status")
+		x.Status.MarshalProtoJSON(s)
+	}
+	if x.Detail != "" || s.HasField("detail") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("detail")
+		s.WriteString(x.Detail)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventSubStatusEvent to JSON.
+func (x *EventSubStatusEvent) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventSubStatusEvent message from JSON.
+func (x *EventSubStatusEvent) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "status":
+			s.AddField("status")
+			x.Status.UnmarshalProtoJSON(s)
+		case "detail":
+			s.AddField("detail")
+			x.Detail = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventSubStatusEvent from JSON.
+func (x *EventSubStatusEvent) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventSubConfig message to JSON.
+func (x *EventSubConfig) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Enabled || s.HasField("enabled") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("enabled")
+		s.WriteBool(x.Enabled)
+	}
+	if x.Profile != "" || s.HasField("profile") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("profile")
+		s.WriteString(x.Profile)
+	}
+	if x.LogEvents || s.HasField("logEvents") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("logEvents")
+		s.WriteBool(x.LogEvents)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventSubConfig to JSON.
+func (x *EventSubConfig) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventSubConfig message from JSON.
+func (x *EventSubConfig) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "enabled":
+			s.AddField("enabled")
+			x.Enabled = s.ReadBool()
+		case "profile":
+			s.AddField("profile")
+			x.Profile = s.ReadString()
+		case "log_events", "logEvents":
+			s.AddField("log_events")
+			x.LogEvents = s.ReadBool()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventSubConfig from JSON.
+func (x *EventSubConfig) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventUser message to JSON.
+func (x *EventUser) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Id != "" || s.HasField("id") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("id")
+		s.WriteString(x.Id)
+	}
+	if x.Login != "" || s.HasField("login") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("login")
+		s.WriteString(x.Login)
+	}
+	if x.Name != "" || s.HasField("name") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("name")
+		s.WriteString(x.Name)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventUser to JSON.
+func (x *EventUser) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventUser message from JSON.
+func (x *EventUser) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "id":
+			s.AddField("id")
+			x.Id = s.ReadString()
+		case "login":
+			s.AddField("login")
+			x.Login = s.ReadString()
+		case "name":
+			s.AddField("name")
+			x.Name = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventUser from JSON.
+func (x *EventUser) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventChannelCheer message to JSON.
+func (x *EventChannelCheer) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.IsAnonymous != nil || s.HasField("isAnonymous") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("isAnonymous")
+		s.WriteBool(*x.IsAnonymous)
+	}
+	if x.From != nil || s.HasField("from") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("from")
+		x.From.MarshalProtoJSON(s.WithField("from"))
+	}
+	if x.Broadcaster != nil || s.HasField("broadcaster") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("broadcaster")
+		x.Broadcaster.MarshalProtoJSON(s.WithField("broadcaster"))
+	}
+	if x.Message != nil || s.HasField("message") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("message")
+		s.WriteString(*x.Message)
+	}
+	if x.Bits != 0 || s.HasField("bits") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("bits")
+		s.WriteUint32(x.Bits)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventChannelCheer to JSON.
+func (x *EventChannelCheer) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventChannelCheer message from JSON.
+func (x *EventChannelCheer) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "is_anonymous", "isAnonymous":
+			s.AddField("is_anonymous")
+			if s.ReadNil() {
+				x.IsAnonymous = nil
+				return
+			}
+			t := s.ReadBool()
+			x.IsAnonymous = &t
+		case "from":
+			if s.ReadNil() {
+				x.From = nil
+				return
+			}
+			x.From = &EventUser{}
+			x.From.UnmarshalProtoJSON(s.WithField("from", true))
+		case "broadcaster":
+			if s.ReadNil() {
+				x.Broadcaster = nil
+				return
+			}
+			x.Broadcaster = &EventUser{}
+			x.Broadcaster.UnmarshalProtoJSON(s.WithField("broadcaster", true))
+		case "message":
+			s.AddField("message")
+			if s.ReadNil() {
+				x.Message = nil
+				return
+			}
+			t := s.ReadString()
+			x.Message = &t
+		case "bits":
+			s.AddField("bits")
+			x.Bits = s.ReadUint32()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventChannelCheer from JSON.
+func (x *EventChannelCheer) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventChannelFollow message to JSON.
+func (x *EventChannelFollow) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Follower != nil || s.HasField("follower") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("follower")
+		x.Follower.MarshalProtoJSON(s.WithField("follower"))
+	}
+	if x.Broadcaster != nil || s.HasField("broadcaster") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("broadcaster")
+		x.Broadcaster.MarshalProtoJSON(s.WithField("broadcaster"))
+	}
+	if x.At != 0 || s.HasField("at") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("at")
+		s.WriteInt64(x.At)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventChannelFollow to JSON.
+func (x *EventChannelFollow) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventChannelFollow message from JSON.
+func (x *EventChannelFollow) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "follower":
+			if s.ReadNil() {
+				x.Follower = nil
+				return
+			}
+			x.Follower = &EventUser{}
+			x.Follower.UnmarshalProtoJSON(s.WithField("follower", true))
+		case "broadcaster":
+			if s.ReadNil() {
+				x.Broadcaster = nil
+				return
+			}
+			x.Broadcaster = &EventUser{}
+			x.Broadcaster.UnmarshalProtoJSON(s.WithField("broadcaster", true))
+		case "at":
+			s.AddField("at")
+			x.At = s.ReadInt64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventChannelFollow from JSON.
+func (x *EventChannelFollow) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the Reward message to JSON.
+func (x *Reward) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Id != "" || s.HasField("id") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("id")
+		s.WriteString(x.Id)
+	}
+	if x.Title != "" || s.HasField("title") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("title")
+		s.WriteString(x.Title)
+	}
+	if x.Cost != 0 || s.HasField("cost") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("cost")
+		s.WriteInt32(x.Cost)
+	}
+	if x.Prompt != "" || s.HasField("prompt") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("prompt")
+		s.WriteString(x.Prompt)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the Reward to JSON.
+func (x *Reward) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Reward message from JSON.
+func (x *Reward) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "id":
+			s.AddField("id")
+			x.Id = s.ReadString()
+		case "title":
+			s.AddField("title")
+			x.Title = s.ReadString()
+		case "cost":
+			s.AddField("cost")
+			x.Cost = s.ReadInt32()
+		case "prompt":
+			s.AddField("prompt")
+			x.Prompt = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the Reward from JSON.
+func (x *Reward) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventChannelPointsCustomRewardRedemption message to JSON.
+func (x *EventChannelPointsCustomRewardRedemption) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Id != "" || s.HasField("id") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("id")
+		s.WriteString(x.Id)
+	}
+	if x.Broadcaster != nil || s.HasField("broadcaster") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("broadcaster")
+		x.Broadcaster.MarshalProtoJSON(s.WithField("broadcaster"))
+	}
+	if x.User != nil || s.HasField("user") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("user")
+		x.User.MarshalProtoJSON(s.WithField("user"))
+	}
+	if x.Input != "" || s.HasField("input") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("input")
+		s.WriteString(x.Input)
+	}
+	if x.Status != "" || s.HasField("status") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("status")
+		s.WriteString(x.Status)
+	}
+	if x.Reward != nil || s.HasField("reward") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("reward")
+		x.Reward.MarshalProtoJSON(s.WithField("reward"))
+	}
+	if x.RedeemedAt != 0 || s.HasField("redeemedAt") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("redeemedAt")
+		s.WriteInt64(x.RedeemedAt)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventChannelPointsCustomRewardRedemption to JSON.
+func (x *EventChannelPointsCustomRewardRedemption) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventChannelPointsCustomRewardRedemption message from JSON.
+func (x *EventChannelPointsCustomRewardRedemption) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "id":
+			s.AddField("id")
+			x.Id = s.ReadString()
+		case "broadcaster":
+			if s.ReadNil() {
+				x.Broadcaster = nil
+				return
+			}
+			x.Broadcaster = &EventUser{}
+			x.Broadcaster.UnmarshalProtoJSON(s.WithField("broadcaster", true))
+		case "user":
+			if s.ReadNil() {
+				x.User = nil
+				return
+			}
+			x.User = &EventUser{}
+			x.User.UnmarshalProtoJSON(s.WithField("user", true))
+		case "input":
+			s.AddField("input")
+			x.Input = s.ReadString()
+		case "status":
+			s.AddField("status")
+			x.Status = s.ReadString()
+		case "reward":
+			if s.ReadNil() {
+				x.Reward = nil
+				return
+			}
+			x.Reward = &Reward{}
+			x.Reward.UnmarshalProtoJSON(s.WithField("reward", true))
+		case "redeemed_at", "redeemedAt":
+			s.AddField("redeemed_at")
+			x.RedeemedAt = s.ReadInt64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventChannelPointsCustomRewardRedemption from JSON.
+func (x *EventChannelPointsCustomRewardRedemption) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventChannelRaid message to JSON.
+func (x *EventChannelRaid) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.FromBroadcaster != nil || s.HasField("fromBroadcaster") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("fromBroadcaster")
+		x.FromBroadcaster.MarshalProtoJSON(s.WithField("fromBroadcaster"))
+	}
+	if x.ToBroadcaster != nil || s.HasField("toBroadcaster") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("toBroadcaster")
+		x.ToBroadcaster.MarshalProtoJSON(s.WithField("toBroadcaster"))
+	}
+	if x.Viewers != 0 || s.HasField("viewers") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("viewers")
+		s.WriteUint32(x.Viewers)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventChannelRaid to JSON.
+func (x *EventChannelRaid) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventChannelRaid message from JSON.
+func (x *EventChannelRaid) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "from_broadcaster", "fromBroadcaster":
+			if s.ReadNil() {
+				x.FromBroadcaster = nil
+				return
+			}
+			x.FromBroadcaster = &EventUser{}
+			x.FromBroadcaster.UnmarshalProtoJSON(s.WithField("from_broadcaster", true))
+		case "to_broadcaster", "toBroadcaster":
+			if s.ReadNil() {
+				x.ToBroadcaster = nil
+				return
+			}
+			x.ToBroadcaster = &EventUser{}
+			x.ToBroadcaster.UnmarshalProtoJSON(s.WithField("to_broadcaster", true))
+		case "viewers":
+			s.AddField("viewers")
+			x.Viewers = s.ReadUint32()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventChannelRaid from JSON.
+func (x *EventChannelRaid) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatMessageCheermote message to JSON.
+func (x *ChatMessageCheermote) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Prefix != "" || s.HasField("prefix") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("prefix")
+		s.WriteString(x.Prefix)
+	}
+	if x.Bits != 0 || s.HasField("bits") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("bits")
+		s.WriteInt64(x.Bits)
+	}
+	if x.Tier != 0 || s.HasField("tier") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("tier")
+		s.WriteInt32(x.Tier)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatMessageCheermote to JSON.
+func (x *ChatMessageCheermote) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatMessageCheermote message from JSON.
+func (x *ChatMessageCheermote) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "prefix":
+			s.AddField("prefix")
+			x.Prefix = s.ReadString()
+		case "bits":
+			s.AddField("bits")
+			x.Bits = s.ReadInt64()
+		case "tier":
+			s.AddField("tier")
+			x.Tier = s.ReadInt32()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatMessageCheermote from JSON.
+func (x *ChatMessageCheermote) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatMessageEmote message to JSON.
+func (x *ChatMessageEmote) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Id != "" || s.HasField("id") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("id")
+		s.WriteString(x.Id)
+	}
+	if x.EmoteSetId != "" || s.HasField("emoteSetId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("emoteSetId")
+		s.WriteString(x.EmoteSetId)
+	}
+	if x.OwnerId != "" || s.HasField("ownerId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("ownerId")
+		s.WriteString(x.OwnerId)
+	}
+	if len(x.Format) > 0 || s.HasField("format") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("format")
+		s.WriteStringArray(x.Format)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatMessageEmote to JSON.
+func (x *ChatMessageEmote) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatMessageEmote message from JSON.
+func (x *ChatMessageEmote) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "id":
+			s.AddField("id")
+			x.Id = s.ReadString()
+		case "emote_set_id", "emoteSetId":
+			s.AddField("emote_set_id")
+			x.EmoteSetId = s.ReadString()
+		case "owner_id", "ownerId":
+			s.AddField("owner_id")
+			x.OwnerId = s.ReadString()
+		case "format":
+			s.AddField("format")
+			if s.ReadNil() {
+				x.Format = nil
+				return
+			}
+			x.Format = s.ReadStringArray()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatMessageEmote from JSON.
+func (x *ChatMessageEmote) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatMessageFragment message to JSON.
+func (x *ChatMessageFragment) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Type != 0 || s.HasField("type") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("type")
+		x.Type.MarshalProtoJSON(s)
+	}
+	if x.Text != "" || s.HasField("text") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("text")
+		s.WriteString(x.Text)
+	}
+	if x.Cheermote != nil || s.HasField("cheermote") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("cheermote")
+		x.Cheermote.MarshalProtoJSON(s.WithField("cheermote"))
+	}
+	if x.Emote != nil || s.HasField("emote") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("emote")
+		x.Emote.MarshalProtoJSON(s.WithField("emote"))
+	}
+	if x.Mention != nil || s.HasField("mention") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("mention")
+		x.Mention.MarshalProtoJSON(s.WithField("mention"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatMessageFragment to JSON.
+func (x *ChatMessageFragment) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatMessageFragment message from JSON.
+func (x *ChatMessageFragment) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "type":
+			s.AddField("type")
+			x.Type.UnmarshalProtoJSON(s)
+		case "text":
+			s.AddField("text")
+			x.Text = s.ReadString()
+		case "cheermote":
+			if s.ReadNil() {
+				x.Cheermote = nil
+				return
+			}
+			x.Cheermote = &ChatMessageCheermote{}
+			x.Cheermote.UnmarshalProtoJSON(s.WithField("cheermote", true))
+		case "emote":
+			if s.ReadNil() {
+				x.Emote = nil
+				return
+			}
+			x.Emote = &ChatMessageEmote{}
+			x.Emote.UnmarshalProtoJSON(s.WithField("emote", true))
+		case "mention":
+			if s.ReadNil() {
+				x.Mention = nil
+				return
+			}
+			x.Mention = &EventUser{}
+			x.Mention.UnmarshalProtoJSON(s.WithField("mention", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatMessageFragment from JSON.
+func (x *ChatMessageFragment) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatMessage message to JSON.
+func (x *ChatMessage) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Text != "" || s.HasField("text") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("text")
+		s.WriteString(x.Text)
+	}
+	if len(x.Fragments) > 0 || s.HasField("fragments") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("fragments")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.Fragments {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("fragments"))
+		}
+		s.WriteArrayEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatMessage to JSON.
+func (x *ChatMessage) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatMessage message from JSON.
+func (x *ChatMessage) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "text":
+			s.AddField("text")
+			x.Text = s.ReadString()
+		case "fragments":
+			s.AddField("fragments")
+			if s.ReadNil() {
+				x.Fragments = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.Fragments = append(x.Fragments, nil)
+					return
+				}
+				v := &ChatMessageFragment{}
+				v.UnmarshalProtoJSON(s.WithField("fragments", false))
+				if s.Err() != nil {
+					return
+				}
+				x.Fragments = append(x.Fragments, v)
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatMessage from JSON.
+func (x *ChatMessage) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatBadge message to JSON.
+func (x *ChatBadge) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.SetId != "" || s.HasField("setId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("setId")
+		s.WriteString(x.SetId)
+	}
+	if x.Id != "" || s.HasField("id") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("id")
+		s.WriteString(x.Id)
+	}
+	if x.Info != "" || s.HasField("info") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("info")
+		s.WriteString(x.Info)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatBadge to JSON.
+func (x *ChatBadge) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatBadge message from JSON.
+func (x *ChatBadge) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "set_id", "setId":
+			s.AddField("set_id")
+			x.SetId = s.ReadString()
+		case "id":
+			s.AddField("id")
+			x.Id = s.ReadString()
+		case "info":
+			s.AddField("info")
+			x.Info = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatBadge from JSON.
+func (x *ChatBadge) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatMessageCheer message to JSON.
+func (x *ChatMessageCheer) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Bits != 0 || s.HasField("bits") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("bits")
+		s.WriteInt64(x.Bits)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatMessageCheer to JSON.
+func (x *ChatMessageCheer) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatMessageCheer message from JSON.
+func (x *ChatMessageCheer) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "bits":
+			s.AddField("bits")
+			x.Bits = s.ReadInt64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatMessageCheer from JSON.
+func (x *ChatMessageCheer) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatMessageReply message to JSON.
+func (x *ChatMessageReply) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.ParentMessageId != "" || s.HasField("parentMessageId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("parentMessageId")
+		s.WriteString(x.ParentMessageId)
+	}
+	if x.ParentMessageBody != "" || s.HasField("parentMessageBody") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("parentMessageBody")
+		s.WriteString(x.ParentMessageBody)
+	}
+	if x.ParentUser != nil || s.HasField("parentUser") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("parentUser")
+		x.ParentUser.MarshalProtoJSON(s.WithField("parentUser"))
+	}
+	if x.ThreadMessageId != "" || s.HasField("threadMessageId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("threadMessageId")
+		s.WriteString(x.ThreadMessageId)
+	}
+	if x.ThreadUser != nil || s.HasField("threadUser") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("threadUser")
+		x.ThreadUser.MarshalProtoJSON(s.WithField("threadUser"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatMessageReply to JSON.
+func (x *ChatMessageReply) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatMessageReply message from JSON.
+func (x *ChatMessageReply) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "parent_message_id", "parentMessageId":
+			s.AddField("parent_message_id")
+			x.ParentMessageId = s.ReadString()
+		case "parent_message_body", "parentMessageBody":
+			s.AddField("parent_message_body")
+			x.ParentMessageBody = s.ReadString()
+		case "parent_user", "parentUser":
+			if s.ReadNil() {
+				x.ParentUser = nil
+				return
+			}
+			x.ParentUser = &EventUser{}
+			x.ParentUser.UnmarshalProtoJSON(s.WithField("parent_user", true))
+		case "thread_message_id", "threadMessageId":
+			s.AddField("thread_message_id")
+			x.ThreadMessageId = s.ReadString()
+		case "thread_user", "threadUser":
+			if s.ReadNil() {
+				x.ThreadUser = nil
+				return
+			}
+			x.ThreadUser = &EventUser{}
+			x.ThreadUser.UnmarshalProtoJSON(s.WithField("thread_user", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatMessageReply from JSON.
+func (x *ChatMessageReply) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventChannelChatMessage_Enrichments message to JSON.
+func (x *EventChannelChatMessage_Enrichments) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.IsMod || s.HasField("isMod") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("isMod")
+		s.WriteBool(x.IsMod)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventChannelChatMessage_Enrichments to JSON.
+func (x *EventChannelChatMessage_Enrichments) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventChannelChatMessage_Enrichments message from JSON.
+func (x *EventChannelChatMessage_Enrichments) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "is_mod", "isMod":
+			s.AddField("is_mod")
+			x.IsMod = s.ReadBool()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventChannelChatMessage_Enrichments from JSON.
+func (x *EventChannelChatMessage_Enrichments) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventChannelChatMessage message to JSON.
+func (x *EventChannelChatMessage) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Id != "" || s.HasField("id") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("id")
+		s.WriteString(x.Id)
+	}
+	if x.Broadcaster != nil || s.HasField("broadcaster") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("broadcaster")
+		x.Broadcaster.MarshalProtoJSON(s.WithField("broadcaster"))
+	}
+	if x.Chatter != nil || s.HasField("chatter") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("chatter")
+		x.Chatter.MarshalProtoJSON(s.WithField("chatter"))
+	}
+	if x.Message != nil || s.HasField("message") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("message")
+		x.Message.MarshalProtoJSON(s.WithField("message"))
+	}
+	if x.MessageType != 0 || s.HasField("messageType") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("messageType")
+		x.MessageType.MarshalProtoJSON(s)
+	}
+	if len(x.Badges) > 0 || s.HasField("badges") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("badges")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.Badges {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("badges"))
+		}
+		s.WriteArrayEnd()
+	}
+	if x.Cheer != nil || s.HasField("cheer") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("cheer")
+		x.Cheer.MarshalProtoJSON(s.WithField("cheer"))
+	}
+	if x.Color != "" || s.HasField("color") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("color")
+		s.WriteString(x.Color)
+	}
+	if x.Reply != nil || s.HasField("reply") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("reply")
+		x.Reply.MarshalProtoJSON(s.WithField("reply"))
+	}
+	if x.ChannelPointsCustomRewardId != "" || s.HasField("channelPointsCustomRewardId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("channelPointsCustomRewardId")
+		s.WriteString(x.ChannelPointsCustomRewardId)
+	}
+	if x.Enrichments != nil || s.HasField("enrichments") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("enrichments")
+		x.Enrichments.MarshalProtoJSON(s.WithField("enrichments"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventChannelChatMessage to JSON.
+func (x *EventChannelChatMessage) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventChannelChatMessage message from JSON.
+func (x *EventChannelChatMessage) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "id":
+			s.AddField("id")
+			x.Id = s.ReadString()
+		case "broadcaster":
+			if s.ReadNil() {
+				x.Broadcaster = nil
+				return
+			}
+			x.Broadcaster = &EventUser{}
+			x.Broadcaster.UnmarshalProtoJSON(s.WithField("broadcaster", true))
+		case "chatter":
+			if s.ReadNil() {
+				x.Chatter = nil
+				return
+			}
+			x.Chatter = &EventUser{}
+			x.Chatter.UnmarshalProtoJSON(s.WithField("chatter", true))
+		case "message":
+			if s.ReadNil() {
+				x.Message = nil
+				return
+			}
+			x.Message = &ChatMessage{}
+			x.Message.UnmarshalProtoJSON(s.WithField("message", true))
+		case "message_type", "messageType":
+			s.AddField("message_type")
+			x.MessageType.UnmarshalProtoJSON(s)
+		case "badges":
+			s.AddField("badges")
+			if s.ReadNil() {
+				x.Badges = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.Badges = append(x.Badges, nil)
+					return
+				}
+				v := &ChatBadge{}
+				v.UnmarshalProtoJSON(s.WithField("badges", false))
+				if s.Err() != nil {
+					return
+				}
+				x.Badges = append(x.Badges, v)
+			})
+		case "cheer":
+			if s.ReadNil() {
+				x.Cheer = nil
+				return
+			}
+			x.Cheer = &ChatMessageCheer{}
+			x.Cheer.UnmarshalProtoJSON(s.WithField("cheer", true))
+		case "color":
+			s.AddField("color")
+			x.Color = s.ReadString()
+		case "reply":
+			if s.ReadNil() {
+				x.Reply = nil
+				return
+			}
+			x.Reply = &ChatMessageReply{}
+			x.Reply.UnmarshalProtoJSON(s.WithField("reply", true))
+		case "channel_points_custom_reward_id", "channelPointsCustomRewardId":
+			s.AddField("channel_points_custom_reward_id")
+			x.ChannelPointsCustomRewardId = s.ReadString()
+		case "enrichments":
+			if s.ReadNil() {
+				x.Enrichments = nil
+				return
+			}
+			x.Enrichments = &EventChannelChatMessage_Enrichments{}
+			x.Enrichments.UnmarshalProtoJSON(s.WithField("enrichments", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventChannelChatMessage from JSON.
+func (x *EventChannelChatMessage) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
 func (m *EventSubStatusEvent) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil

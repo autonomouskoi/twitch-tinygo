@@ -7,6 +7,7 @@ package twitch
 import (
 	fmt "fmt"
 	protobuf_go_lite "github.com/aperturerobotics/protobuf-go-lite"
+	json "github.com/aperturerobotics/protobuf-go-lite/json"
 	io "io"
 	strconv "strconv"
 )
@@ -111,6 +112,8 @@ func (x *ChatConfig) GetMessagePrefix() string {
 type TwitchChatRequestSendRequest struct {
 	unknownFields []byte
 	Text          string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	Channel       string `protobuf:"bytes,2,opt,name=channel,proto3" json:"channel,omitempty"`
+	Profile       string `protobuf:"bytes,3,opt,name=profile,proto3" json:"profile,omitempty"`
 }
 
 func (x *TwitchChatRequestSendRequest) Reset() {
@@ -122,6 +125,20 @@ func (*TwitchChatRequestSendRequest) ProtoMessage() {}
 func (x *TwitchChatRequestSendRequest) GetText() string {
 	if x != nil {
 		return x.Text
+	}
+	return ""
+}
+
+func (x *TwitchChatRequestSendRequest) GetChannel() string {
+	if x != nil {
+		return x.Channel
+	}
+	return ""
+}
+
+func (x *TwitchChatRequestSendRequest) GetProfile() string {
+	if x != nil {
+		return x.Profile
 	}
 	return ""
 }
@@ -161,6 +178,8 @@ func (m *TwitchChatRequestSendRequest) CloneVT() *TwitchChatRequestSendRequest {
 	}
 	r := new(TwitchChatRequestSendRequest)
 	r.Text = m.Text
+	r.Channel = m.Channel
+	r.Profile = m.Profile
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -222,6 +241,12 @@ func (this *TwitchChatRequestSendRequest) EqualVT(that *TwitchChatRequestSendReq
 	if this.Text != that.Text {
 		return false
 	}
+	if this.Channel != that.Channel {
+		return false
+	}
+	if this.Profile != that.Profile {
+		return false
+	}
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
@@ -248,6 +273,230 @@ func (this *TwitchChatRequestSendResponse) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
+
+// MarshalProtoJSON marshals the MessageTypeTwitchChatEvent to JSON.
+func (x MessageTypeTwitchChatEvent) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), MessageTypeTwitchChatEvent_name)
+}
+
+// MarshalText marshals the MessageTypeTwitchChatEvent to text.
+func (x MessageTypeTwitchChatEvent) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), MessageTypeTwitchChatEvent_name)), nil
+}
+
+// MarshalJSON marshals the MessageTypeTwitchChatEvent to JSON.
+func (x MessageTypeTwitchChatEvent) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the MessageTypeTwitchChatEvent from JSON.
+func (x *MessageTypeTwitchChatEvent) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(MessageTypeTwitchChatEvent_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read MessageTypeTwitchChatEvent enum: %v", err)
+		return
+	}
+	*x = MessageTypeTwitchChatEvent(v)
+}
+
+// UnmarshalText unmarshals the MessageTypeTwitchChatEvent from text.
+func (x *MessageTypeTwitchChatEvent) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), MessageTypeTwitchChatEvent_value)
+	if err != nil {
+		return err
+	}
+	*x = MessageTypeTwitchChatEvent(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the MessageTypeTwitchChatEvent from JSON.
+func (x *MessageTypeTwitchChatEvent) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the MessageTypeTwitchChatRequest to JSON.
+func (x MessageTypeTwitchChatRequest) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), MessageTypeTwitchChatRequest_name)
+}
+
+// MarshalText marshals the MessageTypeTwitchChatRequest to text.
+func (x MessageTypeTwitchChatRequest) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), MessageTypeTwitchChatRequest_name)), nil
+}
+
+// MarshalJSON marshals the MessageTypeTwitchChatRequest to JSON.
+func (x MessageTypeTwitchChatRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the MessageTypeTwitchChatRequest from JSON.
+func (x *MessageTypeTwitchChatRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(MessageTypeTwitchChatRequest_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read MessageTypeTwitchChatRequest enum: %v", err)
+		return
+	}
+	*x = MessageTypeTwitchChatRequest(v)
+}
+
+// UnmarshalText unmarshals the MessageTypeTwitchChatRequest from text.
+func (x *MessageTypeTwitchChatRequest) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), MessageTypeTwitchChatRequest_value)
+	if err != nil {
+		return err
+	}
+	*x = MessageTypeTwitchChatRequest(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the MessageTypeTwitchChatRequest from JSON.
+func (x *MessageTypeTwitchChatRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatConfig message to JSON.
+func (x *ChatConfig) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Enabled || s.HasField("enabled") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("enabled")
+		s.WriteBool(x.Enabled)
+	}
+	if x.Profile != "" || s.HasField("profile") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("profile")
+		s.WriteString(x.Profile)
+	}
+	if x.MessagePrefix != "" || s.HasField("messagePrefix") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("messagePrefix")
+		s.WriteString(x.MessagePrefix)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatConfig to JSON.
+func (x *ChatConfig) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatConfig message from JSON.
+func (x *ChatConfig) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "enabled":
+			s.AddField("enabled")
+			x.Enabled = s.ReadBool()
+		case "profile":
+			s.AddField("profile")
+			x.Profile = s.ReadString()
+		case "message_prefix", "messagePrefix":
+			s.AddField("message_prefix")
+			x.MessagePrefix = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatConfig from JSON.
+func (x *ChatConfig) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the TwitchChatRequestSendRequest message to JSON.
+func (x *TwitchChatRequestSendRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Text != "" || s.HasField("text") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("text")
+		s.WriteString(x.Text)
+	}
+	if x.Channel != "" || s.HasField("channel") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("channel")
+		s.WriteString(x.Channel)
+	}
+	if x.Profile != "" || s.HasField("profile") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("profile")
+		s.WriteString(x.Profile)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the TwitchChatRequestSendRequest to JSON.
+func (x *TwitchChatRequestSendRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the TwitchChatRequestSendRequest message from JSON.
+func (x *TwitchChatRequestSendRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "text":
+			s.AddField("text")
+			x.Text = s.ReadString()
+		case "channel":
+			s.AddField("channel")
+			x.Channel = s.ReadString()
+		case "profile":
+			s.AddField("profile")
+			x.Profile = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the TwitchChatRequestSendRequest from JSON.
+func (x *TwitchChatRequestSendRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the TwitchChatRequestSendResponse message to JSON.
+func (x *TwitchChatRequestSendResponse) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the TwitchChatRequestSendResponse to JSON.
+func (x *TwitchChatRequestSendResponse) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the TwitchChatRequestSendResponse message from JSON.
+func (x *TwitchChatRequestSendResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+}
+
+// UnmarshalJSON unmarshals the TwitchChatRequestSendResponse from JSON.
+func (x *TwitchChatRequestSendResponse) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
 func (m *ChatConfig) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -335,6 +584,20 @@ func (m *TwitchChatRequestSendRequest) MarshalToSizedBufferVT(dAtA []byte) (int,
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.Profile) > 0 {
+		i -= len(m.Profile)
+		copy(dAtA[i:], m.Profile)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Profile)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Channel) > 0 {
+		i -= len(m.Channel)
+		copy(dAtA[i:], m.Channel)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Channel)))
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.Text) > 0 {
 		i -= len(m.Text)
 		copy(dAtA[i:], m.Text)
@@ -406,6 +669,14 @@ func (m *TwitchChatRequestSendRequest) SizeVT() (n int) {
 	var l int
 	_ = l
 	l = len(m.Text)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.Channel)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.Profile)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
@@ -618,6 +889,70 @@ func (m *TwitchChatRequestSendRequest) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Text = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Channel", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Channel = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Profile", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Profile = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

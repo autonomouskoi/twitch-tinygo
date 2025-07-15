@@ -7,6 +7,7 @@ package twitch
 import (
 	fmt "fmt"
 	protobuf_go_lite "github.com/aperturerobotics/protobuf-go-lite"
+	json "github.com/aperturerobotics/protobuf-go-lite/json"
 	io "io"
 	strconv "strconv"
 )
@@ -987,6 +988,723 @@ func (this *SendShoutoutResponse) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
+
+// MarshalProtoJSON marshals the MessageTypeRequest to JSON.
+func (x MessageTypeRequest) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), MessageTypeRequest_name)
+}
+
+// MarshalText marshals the MessageTypeRequest to text.
+func (x MessageTypeRequest) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), MessageTypeRequest_name)), nil
+}
+
+// MarshalJSON marshals the MessageTypeRequest to JSON.
+func (x MessageTypeRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the MessageTypeRequest from JSON.
+func (x *MessageTypeRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(MessageTypeRequest_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read MessageTypeRequest enum: %v", err)
+		return
+	}
+	*x = MessageTypeRequest(v)
+}
+
+// UnmarshalText unmarshals the MessageTypeRequest from text.
+func (x *MessageTypeRequest) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), MessageTypeRequest_value)
+	if err != nil {
+		return err
+	}
+	*x = MessageTypeRequest(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the MessageTypeRequest from JSON.
+func (x *MessageTypeRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ListProfilesRequest message to JSON.
+func (x *ListProfilesRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ListProfilesRequest to JSON.
+func (x *ListProfilesRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ListProfilesRequest message from JSON.
+func (x *ListProfilesRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+}
+
+// UnmarshalJSON unmarshals the ListProfilesRequest from JSON.
+func (x *ListProfilesRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ListProfilesResponse_ProfileListing message to JSON.
+func (x *ListProfilesResponse_ProfileListing) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Name != "" || s.HasField("name") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("name")
+		s.WriteString(x.Name)
+	}
+	if x.UserId != "" || s.HasField("userId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("userId")
+		s.WriteString(x.UserId)
+	}
+	if len(x.Scopes) > 0 || s.HasField("scopes") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("scopes")
+		s.WriteStringArray(x.Scopes)
+	}
+	if x.Expires != 0 || s.HasField("expires") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("expires")
+		s.WriteInt64(x.Expires)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ListProfilesResponse_ProfileListing to JSON.
+func (x *ListProfilesResponse_ProfileListing) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ListProfilesResponse_ProfileListing message from JSON.
+func (x *ListProfilesResponse_ProfileListing) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "name":
+			s.AddField("name")
+			x.Name = s.ReadString()
+		case "user_id", "userId":
+			s.AddField("user_id")
+			x.UserId = s.ReadString()
+		case "scopes":
+			s.AddField("scopes")
+			if s.ReadNil() {
+				x.Scopes = nil
+				return
+			}
+			x.Scopes = s.ReadStringArray()
+		case "expires":
+			s.AddField("expires")
+			x.Expires = s.ReadInt64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ListProfilesResponse_ProfileListing from JSON.
+func (x *ListProfilesResponse_ProfileListing) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ListProfilesResponse message to JSON.
+func (x *ListProfilesResponse) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.Names) > 0 || s.HasField("names") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("names")
+		s.WriteStringArray(x.Names)
+	}
+	if len(x.Profiles) > 0 || s.HasField("profiles") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("profiles")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.Profiles {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("profiles"))
+		}
+		s.WriteArrayEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ListProfilesResponse to JSON.
+func (x *ListProfilesResponse) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ListProfilesResponse message from JSON.
+func (x *ListProfilesResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "names":
+			s.AddField("names")
+			if s.ReadNil() {
+				x.Names = nil
+				return
+			}
+			x.Names = s.ReadStringArray()
+		case "profiles":
+			s.AddField("profiles")
+			if s.ReadNil() {
+				x.Profiles = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.Profiles = append(x.Profiles, nil)
+					return
+				}
+				v := &ListProfilesResponse_ProfileListing{}
+				v.UnmarshalProtoJSON(s.WithField("profiles", false))
+				if s.Err() != nil {
+					return
+				}
+				x.Profiles = append(x.Profiles, v)
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ListProfilesResponse from JSON.
+func (x *ListProfilesResponse) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatGetConfigRequest message to JSON.
+func (x *ChatGetConfigRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatGetConfigRequest to JSON.
+func (x *ChatGetConfigRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatGetConfigRequest message from JSON.
+func (x *ChatGetConfigRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+}
+
+// UnmarshalJSON unmarshals the ChatGetConfigRequest from JSON.
+func (x *ChatGetConfigRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ChatGetConfigResponse message to JSON.
+func (x *ChatGetConfigResponse) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Config != nil || s.HasField("config") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("config")
+		x.Config.MarshalProtoJSON(s.WithField("config"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ChatGetConfigResponse to JSON.
+func (x *ChatGetConfigResponse) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ChatGetConfigResponse message from JSON.
+func (x *ChatGetConfigResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "config":
+			if s.ReadNil() {
+				x.Config = nil
+				return
+			}
+			x.Config = &ChatConfig{}
+			x.Config.UnmarshalProtoJSON(s.WithField("config", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ChatGetConfigResponse from JSON.
+func (x *ChatGetConfigResponse) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventSubGetConfigRequest message to JSON.
+func (x *EventSubGetConfigRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventSubGetConfigRequest to JSON.
+func (x *EventSubGetConfigRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventSubGetConfigRequest message from JSON.
+func (x *EventSubGetConfigRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+}
+
+// UnmarshalJSON unmarshals the EventSubGetConfigRequest from JSON.
+func (x *EventSubGetConfigRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventSubGetConfigResponse message to JSON.
+func (x *EventSubGetConfigResponse) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Config != nil || s.HasField("config") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("config")
+		x.Config.MarshalProtoJSON(s.WithField("config"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventSubGetConfigResponse to JSON.
+func (x *EventSubGetConfigResponse) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventSubGetConfigResponse message from JSON.
+func (x *EventSubGetConfigResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "config":
+			if s.ReadNil() {
+				x.Config = nil
+				return
+			}
+			x.Config = &EventSubConfig{}
+			x.Config.UnmarshalProtoJSON(s.WithField("config", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventSubGetConfigResponse from JSON.
+func (x *EventSubGetConfigResponse) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventSubGetStatusRequest message to JSON.
+func (x *EventSubGetStatusRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventSubGetStatusRequest to JSON.
+func (x *EventSubGetStatusRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventSubGetStatusRequest message from JSON.
+func (x *EventSubGetStatusRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+}
+
+// UnmarshalJSON unmarshals the EventSubGetStatusRequest from JSON.
+func (x *EventSubGetStatusRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the EventSubGetStatusResponse message to JSON.
+func (x *EventSubGetStatusResponse) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Status != 0 || s.HasField("status") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("status")
+		x.Status.MarshalProtoJSON(s)
+	}
+	if x.Detail != "" || s.HasField("detail") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("detail")
+		s.WriteString(x.Detail)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the EventSubGetStatusResponse to JSON.
+func (x *EventSubGetStatusResponse) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the EventSubGetStatusResponse message from JSON.
+func (x *EventSubGetStatusResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "status":
+			s.AddField("status")
+			x.Status.UnmarshalProtoJSON(s)
+		case "detail":
+			s.AddField("detail")
+			x.Detail = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the EventSubGetStatusResponse from JSON.
+func (x *EventSubGetStatusResponse) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the GetAvatarPathRequest message to JSON.
+func (x *GetAvatarPathRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Login != "" || s.HasField("login") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("login")
+		s.WriteString(x.Login)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the GetAvatarPathRequest to JSON.
+func (x *GetAvatarPathRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the GetAvatarPathRequest message from JSON.
+func (x *GetAvatarPathRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "login":
+			s.AddField("login")
+			x.Login = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the GetAvatarPathRequest from JSON.
+func (x *GetAvatarPathRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the GetAvatarPathResponse message to JSON.
+func (x *GetAvatarPathResponse) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Login != "" || s.HasField("login") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("login")
+		s.WriteString(x.Login)
+	}
+	if x.Path != "" || s.HasField("path") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("path")
+		s.WriteString(x.Path)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the GetAvatarPathResponse to JSON.
+func (x *GetAvatarPathResponse) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the GetAvatarPathResponse message from JSON.
+func (x *GetAvatarPathResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "login":
+			s.AddField("login")
+			x.Login = s.ReadString()
+		case "path":
+			s.AddField("path")
+			x.Path = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the GetAvatarPathResponse from JSON.
+func (x *GetAvatarPathResponse) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the GetUserRequest message to JSON.
+func (x *GetUserRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Profile != "" || s.HasField("profile") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("profile")
+		s.WriteString(x.Profile)
+	}
+	if x.Login != "" || s.HasField("login") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("login")
+		s.WriteString(x.Login)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the GetUserRequest to JSON.
+func (x *GetUserRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the GetUserRequest message from JSON.
+func (x *GetUserRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "profile":
+			s.AddField("profile")
+			x.Profile = s.ReadString()
+		case "login":
+			s.AddField("login")
+			x.Login = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the GetUserRequest from JSON.
+func (x *GetUserRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the GetUserResponse message to JSON.
+func (x *GetUserResponse) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Login != "" || s.HasField("login") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("login")
+		s.WriteString(x.Login)
+	}
+	if x.User != nil || s.HasField("user") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("user")
+		x.User.MarshalProtoJSON(s.WithField("user"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the GetUserResponse to JSON.
+func (x *GetUserResponse) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the GetUserResponse message from JSON.
+func (x *GetUserResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "login":
+			s.AddField("login")
+			x.Login = s.ReadString()
+		case "user":
+			if s.ReadNil() {
+				x.User = nil
+				return
+			}
+			x.User = &User{}
+			x.User.UnmarshalProtoJSON(s.WithField("user", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the GetUserResponse from JSON.
+func (x *GetUserResponse) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the SendShoutoutRequest message to JSON.
+func (x *SendShoutoutRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.FromProfile != "" || s.HasField("fromProfile") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("fromProfile")
+		s.WriteString(x.FromProfile)
+	}
+	if x.ToBroadcasterId != "" || s.HasField("toBroadcasterId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("toBroadcasterId")
+		s.WriteString(x.ToBroadcasterId)
+	}
+	if x.ModeratorId != "" || s.HasField("moderatorId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("moderatorId")
+		s.WriteString(x.ModeratorId)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the SendShoutoutRequest to JSON.
+func (x *SendShoutoutRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the SendShoutoutRequest message from JSON.
+func (x *SendShoutoutRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "from_profile", "fromProfile":
+			s.AddField("from_profile")
+			x.FromProfile = s.ReadString()
+		case "to_broadcaster_id", "toBroadcasterId":
+			s.AddField("to_broadcaster_id")
+			x.ToBroadcasterId = s.ReadString()
+		case "moderator_id", "moderatorId":
+			s.AddField("moderator_id")
+			x.ModeratorId = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the SendShoutoutRequest from JSON.
+func (x *SendShoutoutRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the SendShoutoutResponse message to JSON.
+func (x *SendShoutoutResponse) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the SendShoutoutResponse to JSON.
+func (x *SendShoutoutResponse) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the SendShoutoutResponse message from JSON.
+func (x *SendShoutoutResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+}
+
+// UnmarshalJSON unmarshals the SendShoutoutResponse from JSON.
+func (x *SendShoutoutResponse) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
 func (m *ListProfilesRequest) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
